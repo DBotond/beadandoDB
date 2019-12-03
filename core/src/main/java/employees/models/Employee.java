@@ -1,9 +1,9 @@
-package employee.models;
+package employees.models;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Employees {
+public class Employee {
     private UUID id;
     private String firstname;
     private String lastname;
@@ -13,11 +13,11 @@ public class Employees {
     private LocalDate hiredate;
     private int salary;
 
-    public Employees() {
+    public Employee() {
         this.id = UUID.randomUUID();
     }
 
-    public Employees(String firstname, String lastname, Gender gender, Titles title, LocalDate birthdate, LocalDate hiredate, int salary) {
+    public Employee(String firstname, String lastname, Gender gender, Titles title, LocalDate birthdate, LocalDate hiredate, int salary) {
         this();
         this.firstname = firstname;
         this.lastname = lastname;
