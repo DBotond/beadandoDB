@@ -12,6 +12,6 @@ public interface EmployeeService {
     Employee getEmployee(UUID id) throws IdNotFoundException;
     void addEmployee(Employee employee) throws WrongDateException, IllegalArgumentException;
     void deleteEmployee(Employee employee) throws IdNotFoundException, WrongDateException;
-    void updateEmployee(Employee employee) throws IdNotFoundException, IllegalArgumentException;
+    void updateEmployee(Employee employee) throws IdNotFoundException, IllegalArgumentException, WrongDateException;
     void deleteEmployee(UUID id) throws IdNotFoundException;
 }
