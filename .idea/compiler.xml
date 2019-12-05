@@ -9,6 +9,7 @@
         <module name="core" />
         <module name="controller" />
         <module name="service" />
+        <module name="web" />
         <module name="dao" />
       </profile>
     </annotationProcessing>

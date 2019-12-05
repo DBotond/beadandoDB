@@ -4,6 +4,7 @@ package controllers;
 import employees.exceptions.IdNotFoundException;
 import employees.exceptions.WrongDateException;
 import employees.models.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import services.EmployeeService;
 
@@ -13,7 +14,7 @@ import java.util.Collection;
 public class EmployeeController {
     private EmployeeService service;
 
-    public EmployeeController(EmployeeService service){
+    public EmployeeController(@Autowired EmployeeService service){
         this.service = service;
     }
 
