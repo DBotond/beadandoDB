@@ -10,6 +10,7 @@ import services.EmployeeService;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 
 @RestController
 public class EmployeeController {
@@ -38,7 +39,7 @@ public class EmployeeController {
         return service.getEmployee(employee.getId());
     }
 
-    @RequestMapping(value = "/employee/{lastname}")
+    @RequestMapping(value = "/employee/{lastname}", method = RequestMethod.GET)
     @ResponseBody
     public Collection<Employee> getEmployeeByLastName(@PathVariable String lastname){
         Collection<Employee> employees = service.getAllEmployee();
@@ -53,5 +54,23 @@ public class EmployeeController {
         return result;
     }
 
-    
+    @RequestMapping(value = "/employeeid/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Employee getEmployeeById(@PathVariable UUID id) throws IdNotFoundException{
+        return service.getEmployee(id);
+    }
+
+    @ExceptionHandler(IdNotFoundException.class)
+    @ResponseBody
+    public String handleIdNotFoundException(Exception e){
+        return "UUID not found: " + e.getMessage();
+    }
+
+    @ExceptionHandler(WrongDateException.class)
+    @ResponseBody
+    public String handleWrongDateException(Exception e){
+        return "Bad date:" + e.getMessage();
+    }
+
+
 }
