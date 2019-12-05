@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import services.EmployeeService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @RestController
@@ -36,4 +37,21 @@ public class EmployeeController {
         service.addEmployee(employee);
         return service.getEmployee(employee.getId());
     }
+
+    @RequestMapping(value = "/employee/{lastname}")
+    @ResponseBody
+    public Collection<Employee> getEmployeeByLastName(@PathVariable String lastname){
+        Collection<Employee> employees = service.getAllEmployee();
+        Collection<Employee> result = new ArrayList<Employee>();
+
+        for(Employee e: employees){
+            if(e.getLastname().equalsIgnoreCase(lastname)){
+                result.add(e);
+            }
+        }
+
+        return result;
+    }
+
+    
 }
