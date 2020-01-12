@@ -31,7 +31,7 @@ public class EmployeeServiceImplement implements EmployeeService {
         else dao.addEmployee(employee);
     }
 
-    public void deleteEmployee(Employee employee) throws IdNotFoundException, WrongDateException {
+    public void deleteEmployee(Employee employee) throws IdNotFoundException {
         dao.deleteEmployee(employee);
     }
 

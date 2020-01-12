@@ -28,6 +28,8 @@
             <version>2.10.0.pr3</version>
         </dependency>
     </dependencies>
-
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
 </project>
