@@ -100,9 +100,8 @@ public class EmployeeDaoJSON implements EmployeeDao {
 
     }
 
-    public void updateEmployee(Employee employee) throws IdNotFoundException {
-        Employee delete = new Employee();
-        delete.setId(employee.getId());
+    public void updateEmployee(UUID id, Employee employee) throws IdNotFoundException {
+        Employee delete = readEmployee(id);
         deleteEmployee(delete);
         addEmployee(employee);
     }

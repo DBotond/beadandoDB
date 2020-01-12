@@ -28,6 +28,8 @@ public class EmployeeServiceImplement implements EmployeeService {
     public void addEmployee(Employee employee) throws WrongDateException, IllegalArgumentException {
         if(employee.getHiredate().isAfter(LocalDate.now().plusYears(1)))
             throw new WrongDateException();
+        if(employee.getBirthdate().isAfter(LocalDate.now().plusYears(1)))
+            throw new WrongDateException();
         else dao.addEmployee(employee);
     }
 
@@ -35,11 +37,14 @@ public class EmployeeServiceImplement implements EmployeeService {
         dao.deleteEmployee(employee);
     }
 
-    public void updateEmployee(Employee employee) throws IdNotFoundException, IllegalArgumentException, WrongDateException {
+    public void updateEmployee(UUID id, Employee employee) throws IdNotFoundException, IllegalArgumentException, WrongDateException {
         if(employee.getHiredate().isAfter(LocalDate.now().plusYears(1))){
             throw new WrongDateException();
         }
-        else dao.updateEmployee(employee);
+        else if(employee.getBirthdate().isAfter(LocalDate.now().plusYears(1))){
+            throw new WrongDateException();
+        }
+        else dao.updateEmployee(id, employee);
     }
 
     public void deleteEmployee(UUID id) throws IdNotFoundException {

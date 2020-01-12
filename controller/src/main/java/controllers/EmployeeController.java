@@ -60,6 +60,21 @@ public class EmployeeController {
         return service.getEmployee(id);
     }
 
+    @RequestMapping(value = "/employeeid/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String deleteemployee(@PathVariable UUID id) throws IdNotFoundException {
+        service.deleteEmployee(id);
+        return "Delete successful!";
+    }
+
+    @RequestMapping(value = "/employeeid/{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public Employee updateEmployee(@PathVariable UUID id, @RequestBody Employee employee) throws WrongDateException, IdNotFoundException {
+        employee.setId(id);
+        service.updateEmployee(id,employee);
+        return employee;
+    }
+
     @ExceptionHandler(IdNotFoundException.class)
     @ResponseBody
     public String handleIdNotFoundException(Exception e){

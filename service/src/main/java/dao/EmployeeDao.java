@@ -10,6 +10,6 @@ public interface EmployeeDao {
     void addEmployee(Employee employee);
     Collection<Employee> readAllEmployee();
     Employee readEmployee(UUID id) throws IdNotFoundException;
-    void updateEmployee(Employee employee) throws IdNotFoundException;
+    void updateEmployee(UUID id, Employee employee) throws IdNotFoundException;
     void deleteEmployee(Employee employee) throws IdNotFoundException;
 }

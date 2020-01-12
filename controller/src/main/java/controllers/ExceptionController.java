@@ -17,4 +17,11 @@ public class ExceptionController {
     public String jsonMappingException(Exception e){
         return e.getMessage();
     }
+
+    @ExceptionHandler(InvalidFormatException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String noEnumValueException(Exception e){
+        return "Invalid enum value at:" + e.getMessage();
+    }
 }
