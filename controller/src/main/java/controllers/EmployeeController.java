@@ -5,10 +5,13 @@ import employees.exceptions.CEOAlreadyExists;
 import employees.exceptions.IdNotFoundException;
 import employees.exceptions.WrongDateException;
 import employees.models.Employee;
+import employees.models.Titles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import services.EmployeeService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
@@ -59,6 +62,20 @@ public class EmployeeController {
     @ResponseBody
     public Employee getEmployeeById(@PathVariable UUID id) throws IdNotFoundException{
         return service.getEmployee(id);
+    }
+
+    @RequestMapping(value = "/employee/{date}", method = RequestMethod.GET)
+    @ResponseBody
+    public Collection<Employee> getEmployeesByDate(@PathVariable @DateTimeFormat(iso= DateTimeFormat.ISO.DATE) LocalDate date){
+        Collection<Employee> employees = service.getAllEmployee();
+        Collection<Employee> result = new ArrayList<>();
+        for (Employee e:
+                employees) {
+            if(e.getHiredate().isEqual(date)){
+                result.add(e);
+            }
+        }
+        return result;
     }
 
     @RequestMapping(value = "/employeeid/{id}", method = RequestMethod.DELETE)
