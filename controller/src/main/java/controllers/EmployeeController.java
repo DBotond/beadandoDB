@@ -1,6 +1,7 @@
 package controllers;
 
 
+import employees.exceptions.CEOAlreadyExists;
 import employees.exceptions.IdNotFoundException;
 import employees.exceptions.WrongDateException;
 import employees.models.Employee;
@@ -34,7 +35,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/employees", method = RequestMethod.POST)
     @ResponseBody
-    public Employee addNewEmployee(@RequestBody Employee employee) throws WrongDateException, IdNotFoundException {
+    public Employee addNewEmployee(@RequestBody Employee employee) throws WrongDateException, IdNotFoundException, CEOAlreadyExists {
         service.addEmployee(employee);
         return service.getEmployee(employee.getId());
     }
@@ -77,14 +78,14 @@ public class EmployeeController {
 
     @ExceptionHandler(IdNotFoundException.class)
     @ResponseBody
-    public String handleIdNotFoundException(Exception e){
-        return "UUID not found: " + e.getMessage();
+    public String handleIdNotFoundException(Exception ex){
+        return "UUID not found: " + ex.getMessage();
     }
 
     @ExceptionHandler(WrongDateException.class)
     @ResponseBody
-    public String handleWrongDateException(Exception e){
-        return "Bad date:" + e.getMessage();
+    public String handleWrongDateException(Exception ex){
+        return "Bad date:" + ex.getMessage();
     }
 
 

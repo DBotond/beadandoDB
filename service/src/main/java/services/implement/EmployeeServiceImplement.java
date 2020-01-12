@@ -1,9 +1,11 @@
 package services.implement;
 
 import dao.EmployeeDao;
+import employees.exceptions.CEOAlreadyExists;
 import employees.exceptions.IdNotFoundException;
 import employees.exceptions.WrongDateException;
 import employees.models.Employee;
+import employees.models.Titles;
 import services.EmployeeService;
 
 import java.time.LocalDate;
@@ -25,11 +27,14 @@ public class EmployeeServiceImplement implements EmployeeService {
         return dao.readEmployee(id);
     }
 
-    public void addEmployee(Employee employee) throws WrongDateException, IllegalArgumentException {
+    public void addEmployee(Employee employee) throws WrongDateException, IllegalArgumentException , CEOAlreadyExists {
         if(employee.getHiredate().isAfter(LocalDate.now().plusYears(1)))
             throw new WrongDateException();
         if(employee.getBirthdate().isAfter(LocalDate.now().plusYears(1)))
             throw new WrongDateException();
+        if(employee.getTitle().equals(Titles.CEO))
+            throw new CEOAlreadyExists(Titles.CEO);
+
         else dao.addEmployee(employee);
     }
 
@@ -37,7 +42,7 @@ public class EmployeeServiceImplement implements EmployeeService {
         dao.deleteEmployee(employee);
     }
 
-    public void updateEmployee(UUID id, Employee employee) throws IdNotFoundException, IllegalArgumentException, WrongDateException {
+    public void updateEmployee(UUID id, Employee employee) throws IdNotFoundException, WrongDateException {
         if(employee.getHiredate().isAfter(LocalDate.now().plusYears(1))){
             throw new WrongDateException();
         }

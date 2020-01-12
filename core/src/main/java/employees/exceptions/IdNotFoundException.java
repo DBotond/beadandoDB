@@ -1,10 +1,16 @@
 package employees.exceptions;
 
-public class IdNotFoundException extends Exception{
+import employees.models.Titles;
+
+import java.util.UUID;
+
+public class IdNotFoundException extends Throwable{
     public IdNotFoundException() {
     }
 
-    public IdNotFoundException(String message) {
-        super(message);
+    public IdNotFoundException(UUID id) {
+        super("Id not found :"+id);
     }
+
+
 }
